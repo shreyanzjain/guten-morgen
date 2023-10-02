@@ -58,9 +58,9 @@ app.get("/", (req, res) => {
   return res.send("Home");
 });
 
-app.post("/add/user/", jsonParser, (req, res) => {
+app.post("/add/user/", jsonParser, async (req, res) => {
   const username = req.body.username;
-  if (user_exists(username)) {
+  if (await user_exists(username)) {
     return res.status(409).send({ user: "exists" });
   } else {
     const password = req.body.password;
