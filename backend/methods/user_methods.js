@@ -24,16 +24,14 @@ async function create_user(username, password) {
     });
 }
 
-function user_exists(username) {
-  const user = async () => {
-    return await prisma.user.findFirst({
+async function user_exists(username) {
+  const user = await prisma.user.findFirst({
       where: {
         username: username,
       },
     });
-  };
-
-  if (user) {
+  
+  if (user !== null) {
     return true;
   }
 
