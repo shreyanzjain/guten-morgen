@@ -11,9 +11,9 @@ datasource db {
 }
 
 enum Status {
-  TODO
-  DOING
-  COMPLETED
+  todo
+  doing
+  completed
 }
 
 
@@ -31,7 +31,7 @@ model Task  {
   id Int @id @default(autoincrement())
   title String @db.VarChar(255)
   description String? @db.Text
-  status Status @default(TODO)
+  status Status @default(todo)
 
   user User @relation(fields: [userId], references: [id])
   userId Int
