@@ -25,7 +25,10 @@ require("dotenv").config();
 const app = express();
 const port = 3000;
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://127.0.0.1:5173',
+  credentials: true
+}));
 app.use(cookieParser());
 
 const options = {
@@ -73,7 +76,7 @@ app.get("/users/", authorization, async (req, res) => {
 app.post("/login/", jsonParser, async (req, res) => {
   const username = req.body.username;
 
-  if (user_exists(username)) {
+  if(await user_exists(username)) {
     const userId = await get_userId(username);
     const password = req.body.password;
     if (await password_matches(username, password)) {
@@ -89,7 +92,6 @@ app.post("/login/", jsonParser, async (req, res) => {
       return res.status(403).send("Incorrect Credentials");
     }
   } else {
-    console.log("incorrect username");
     return res.status(403).send("Incorrect Credentials");
   }
 });
