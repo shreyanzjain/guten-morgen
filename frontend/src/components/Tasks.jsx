@@ -8,9 +8,14 @@ function Tasks() {
 
   const [addTask, setAddTask] = useState(false);
   const [taskAdded, setTaskAdded] = useState(false);
+  const [taskCompleteDeleted, setTaskCompleteDeleted] = useState(0);
 
   const handleTaskAdded = () => {
     setTaskAdded(!taskAdded);
+  }
+
+  const handleTaskCompleteDeleted = () => {
+    setTaskCompleteDeleted(taskCompleteDeleted => taskCompleteDeleted + 1);
   }
 
   useEffect(() => {
@@ -28,9 +33,10 @@ function Tasks() {
     }
 
     fetchData();
-  }, [taskAdded]);
+  }, [taskAdded, taskCompleteDeleted]);
+  
   const taskList = data.map(({ title, description, status, id }) => (
-    <Task key={id} title={title} description={description} status={status} />
+    <Task key={id} id={id} title={title} description={description} status={status} onCompleteDelete={handleTaskCompleteDeleted}/>
   ));
 
   return (

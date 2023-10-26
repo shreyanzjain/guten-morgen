@@ -7,6 +7,7 @@ const {
   get_userId,
   add_task,
   get_user_tasks,
+  delete_task
 } = require("./methods/user_methods");
 
 // import node_modules that are required
@@ -106,6 +107,12 @@ app.post("/add/tasks/", authorization, jsonParser, (req, res) => {
     return res.status(201).send("Successful.");
   }
 });
+
+app.delete("/remove/task/:id", authorization, async (req, res) => {
+  const id = req.params.id;
+  await delete_task();
+  return res.status(200).send(`Task with task id ${id} deleted successfuly`)
+})
 
 app.get("/tasks/", authorization, async (req, res) => {
   res.status(200).send(await get_user_tasks(req.userId))

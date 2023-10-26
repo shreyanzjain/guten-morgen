@@ -20,6 +20,8 @@ function AddTaskForm({ onTaskAdded }) {
       )
       .then((res) => {
         console.log(res);
+        setTitle("");
+        setDescription("");
         onTaskAdded();
       })
       .catch((err) => console.log(err));
@@ -30,20 +32,20 @@ function AddTaskForm({ onTaskAdded }) {
         <input
           type="text"
           id="form-title"
-          className="h-1/6 px-2 py-1 border-2 rounded-md border-slate-400"
+          className="h-1/6 px-2 py-1 border-2 rounded-md border-slate-400 focus:outline-none focus:border-blue-300"
           placeholder="Title of your task goes here..."
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <textarea
-          className="h-4/6 px-2 py-1 border-2 border-slate-400 rounded-md"
+          className="h-4/6 px-2 py-1 border-2 border-slate-400 rounded-md focus:outline-none focus:border-blue-300"
           placeholder="Enter a long description here..."
           id="form-description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
         <a
-          className="container h-1/6 w-full bg-teal-900 rounded-md"
+          className="container h-1/6 w-full bg-teal-900 rounded-md hover:shadow-md hover:shadow-teal-300"
           href=""
           onClick={async (e) => {
             e.preventDefault();
