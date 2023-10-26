@@ -7,7 +7,7 @@ function Task({ title, description, status }) {
         "completed": "#A7C18F"
     }
   return (
-    <div className="container h-1/5 mt-2">
+    <div className="container h-32 mb-2">
       <div className="px-2 pb-2 pt-0.5 bg-white shadow-md h-full rounded-md">
         <div className="container h-2/6 overflow-clip">
           <div className="flex w-full h-full items-start">

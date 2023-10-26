@@ -96,19 +96,24 @@ app.post("/login/", jsonParser, async (req, res) => {
   }
 });
 
-app.post("/add/task/", authorization, jsonParser, (req, res) => {
+app.post("/add/tasks/", authorization, jsonParser, (req, res) => {
   const { title, description } = req.body;
   try {
     add_task(req.userId, title, description);
   } catch {
     return res.status(401).send("Unsuccessful.");
   } finally {
-    return res.status(200).send("Successful.");
+    return res.status(201).send("Successful.");
   }
 });
 
 app.get("/tasks/", authorization, async (req, res) => {
   res.status(200).send(await get_user_tasks(req.userId))
+})
+
+app.get("/logout/", authorization, (req, res) => {
+  return res
+  .clearCookie('user_token').send("Logout Success!");
 })
 
 httpsServer.listen(port, () => {

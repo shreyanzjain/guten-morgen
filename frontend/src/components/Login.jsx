@@ -30,7 +30,7 @@ function Login() {
   return (
     <div className="h-screen bg-slate-300">
       <div className="flex h-4/6 items-start justify-center">
-        <div className="mt-8 h-full w-1/4 rounded-lg bg-slate-50 shadow-md">
+        <div className="h-full w-3/4 md:w-1/2 lg:w-1/3 rounded-lg bg-slate-50 shadow-md mt-32">
           <div className="container h-1/6 rounded-t-lg bg-slate-100 border-b-2 border-slate-200 mb-3">
             <div className="flex h-full items-center justify-center text-xl font-semibold text-slate-700">
               <div className="w-11/12 text-2xl text-semibold">
