@@ -12,7 +12,7 @@ function Task({ id, title, description, status, onCompleteDelete }) {
 
   const handleDeleteComplete = async () => {
     await axios
-      .delete(`https://127.0.0.1:3000/remove/task/${id}`, {
+      .delete(`http://127.0.0.1:3000/remove/task/${id}`, {
         withCredentials: true
       })
       .then((res) => {

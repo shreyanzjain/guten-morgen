@@ -6,7 +6,7 @@ function NavBar({ onClickRegister, onClickLogin }) {
   const [cookie] = useCookies(["user_token"]);
   const handleLogout = async () => {
     await axios
-      .get("https://127.0.0.1:3000/logout/", {
+      .get("http://127.0.0.1:3000/logout/", {
         withCredentials: true,
       })
       .then((resp) => {

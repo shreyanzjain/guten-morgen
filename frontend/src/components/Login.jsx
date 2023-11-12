@@ -3,30 +3,30 @@ import LoginIcon from "@mui/icons-material/Login";
 import { useState } from "react";
 import axios from "axios";
 
-function Login({onClickRegister}) {
+function Login({ onClickRegister }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-	const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-		await axios
-			.post(
-				"https://127.0.0.1:3000/login/",
-				{
-					username: username,
-					password: password,
-				},
-				{
-					withCredentials: true,
-				}
-			)
-			.then((res) => {
-				console.log(res);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}
+    await axios
+      .post(
+        "http://127.0.0.1:3000/login/",
+        {
+          username: username,
+          password: password,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className="h-screen bg-slate-300">
@@ -51,7 +51,7 @@ function Login({onClickRegister}) {
                   type="text"
                   className="w-11/12 h-4/6 px-4 text-xl font-semibold bg-slate-100 border-2 border-slate-200 focus:outline-none focus:caret-slate-300"
                   placeholder="username"
-                  onChange={e => setUsername(e.target.value)}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
             </div>
@@ -63,7 +63,7 @@ function Login({onClickRegister}) {
                   type="password"
                   className="w-11/12 h-4/6 px-4 text-xl font-semibold bg-slate-100 border-2 border-slate-200 focus:outline-none focus:caret-slate-300"
                   placeholder="password"
-                  onChange={e => setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
             </div>
@@ -81,10 +81,14 @@ function Login({onClickRegister}) {
           <div className="container h-1/6 mt-4 border-t-2 border-slate-200">
             <div className="flex flex-col h-full items-center justify-center">
               <p>Do not have an account?</p>
-              <a href="#" className="text-blue-700 hover:underline" onClick={e => {
-                e.preventDefault();
-                onClickRegister();
-              }}>
+              <a
+                href="#"
+                className="text-blue-700 hover:underline"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onClickRegister();
+                }}
+              >
                 Sign Up
               </a>
             </div>

@@ -7,14 +7,12 @@ const {
   get_userId,
   add_task,
   get_user_tasks,
-  delete_task
+  delete_task,
 } = require("./methods/user_methods");
 
 // import node_modules that are required
 const express = require("express");
-const https = require("https");
 const cors = require("cors");
-const fs = require("fs");
 const bodyParser = require("body-parser");
 const jsonParser = bodyParser.json();
 const cookieParser = require("cookie-parser");
@@ -27,17 +25,20 @@ const app = express();
 const port = 3000;
 
 app.use(cors({
-  origin: 'https://127.0.0.1:5173',
-  credentials: true
+  origin: "http://127.0.0.1:5173",
+  credentials: true,
 }));
 app.use(cookieParser());
 
+/* 
+HTTPS server
 const options = {
   key: fs.readFileSync("./cert/key.pem"),
   cert: fs.readFileSync("./cert/cert.pem"),
 };
 
 const httpsServer = https.createServer(options, app);
+*/
 
 // authorization dependency
 const authorization = (req, res, next) => {
@@ -77,15 +78,16 @@ app.get("/users/", authorization, async (req, res) => {
 app.post("/login/", jsonParser, async (req, res) => {
   const username = req.body.username;
 
-  if(await user_exists(username)) {
+  if (await user_exists(username)) {
     const userId = await get_userId(username);
     const password = req.body.password;
     if (await password_matches(username, password)) {
       const token = jwt.sign({ userId: userId.id }, process.env.JWT_SECRET_KEY);
       return res
         .cookie("user_token", token, {
-          secure: true,
+          // secure: true,
           sameSite: "lax",
+          httpOnly: true,
         })
         .status(200)
         .send("Successful Login");
@@ -111,18 +113,17 @@ app.post("/add/tasks/", authorization, jsonParser, (req, res) => {
 app.delete("/remove/task/:id", authorization, async (req, res) => {
   const id = req.params.id;
   await delete_task();
-  return res.status(200).send(`Task with task id ${id} deleted successfuly`)
-})
+  return res.status(200).send(`Task with task id ${id} deleted successfuly`);
+});
 
 app.get("/tasks/", authorization, async (req, res) => {
-  res.status(200).send(await get_user_tasks(req.userId))
-})
+  res.status(200).send(await get_user_tasks(req.userId));
+});
 
 app.get("/logout/", authorization, (req, res) => {
-  return res
-  .clearCookie('user_token').send("Logout Success!");
-})
+  return res.clearCookie("user_token").send("Logout Success!");
+});
 
-httpsServer.listen(port, () => {
-  console.log(`Server running at https://127.0.0.1:${port}/`);
+app.listen(port, () => {
+  console.log(`Server running at http://127.0.0.1:${port}/`);
 });
