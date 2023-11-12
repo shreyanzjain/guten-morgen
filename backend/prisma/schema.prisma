@@ -33,7 +33,7 @@ model Task  {
   description String? @db.Text
   status Status @default(todo)
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
 
   @@map("tasks")
