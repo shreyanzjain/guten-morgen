@@ -123,7 +123,11 @@ app.get("/tasks/", authorization, async (req, res) => {
 });
 
 app.get("/logout/", authorization, (req, res) => {
-  return res.clearCookie("user_token").send("Logout Success!");
+  return res.clearCookie("user_token").status(200).send("Logout Success!");
+});
+
+app.get("/isLoggedIn/", authorization, (req, res) => {
+  return res.status(200).send("We Logged In");
 });
 
 app.listen(port, () => {
