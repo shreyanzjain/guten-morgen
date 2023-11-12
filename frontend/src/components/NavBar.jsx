@@ -1,15 +1,21 @@
 /* eslint-disable react/prop-types */
 import axios from "axios";
-import { useCookies } from "react-cookie";
 
-function NavBar({ onClickRegister, onClickLogin }) {
-  const [cookie] = useCookies(["user_token"]);
+function NavBar({
+  onClickRegister,
+  onClickLogin,
+  setLoginStatus,
+  loginStatus,
+}) {
   const handleLogout = async () => {
     await axios
       .get("http://127.0.0.1:3000/logout/", {
         withCredentials: true,
       })
       .then((resp) => {
+        if (resp.status == 200) {
+          setLoginStatus(false);
+        }
         console.log(resp);
       })
       .catch((err) => {
@@ -22,7 +28,7 @@ function NavBar({ onClickRegister, onClickLogin }) {
         <div className="flex h-full items-center justify-between text-slate-50">
           <div className="ms-6 me-6 font-bold">Guten-Morgen</div>
           <div className="flex items-center justify-end me-6 font-bold">
-            {!cookie.user_token && (
+            {!loginStatus && (
               <a
                 className="ms-6 me-6"
                 href="#"
@@ -34,15 +40,19 @@ function NavBar({ onClickRegister, onClickLogin }) {
                 Register
               </a>
             )}
-            {!cookie.user_token && (
-              <a href="#" className="me-6" onClick={(e) => {
-                e.preventDefault();
-                onClickLogin();
-              }}>
+            {!loginStatus && (
+              <a
+                href="#"
+                className="me-6"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onClickLogin();
+                }}
+              >
                 Login
               </a>
             )}
-            {cookie.user_token && (
+            {loginStatus && (
               <a href="#" onClick={handleLogout}>
                 Logout
               </a>

@@ -12,7 +12,7 @@ function AddTaskForm({ onTaskAdded }) {
         "http://127.0.0.1:3000/add/tasks",
         {
           title: title,
-          description: description
+          description: description,
         },
         {
           withCredentials: true,
@@ -41,7 +41,6 @@ function AddTaskForm({ onTaskAdded }) {
           className="h-4/6 px-2 py-1 border-2 border-slate-400 rounded-md focus:outline-none focus:border-blue-300"
           placeholder="Enter a long description here..."
           id="form-description"
-          contentEditable="true"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />

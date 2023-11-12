@@ -3,7 +3,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import { useState } from "react";
 import axios from "axios";
 
-function Login({ onClickRegister }) {
+function Login({ onClickSignUp, setLoginStatus }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,6 +21,9 @@ function Login({ onClickRegister }) {
         }
       )
       .then((res) => {
+        if(res.status == 200){
+          setLoginStatus(true);
+        }
         console.log(res);
       })
       .catch((err) => {
@@ -86,7 +89,7 @@ function Login({ onClickRegister }) {
                 className="text-blue-700 hover:underline"
                 onClick={(e) => {
                   e.preventDefault();
-                  onClickRegister();
+                  onClickSignUp();
                 }}
               >
                 Sign Up

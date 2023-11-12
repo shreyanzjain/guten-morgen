@@ -2,24 +2,26 @@ import Login from "./Login";
 import Tasks from "./Tasks";
 import NavBar from "./NavBar";
 import Register from "./Register";
-import { useCookies } from "react-cookie";
+
 import { useEffect, useState } from "react";
 
 function Home() {
-  const [cookie] = useCookies(["user_token"]);
+  
+  const [loginStatus, setLoginStatus] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [showTasks, setShowTasks] = useState(false);
 
   useEffect(() => {
-    if (!cookie.user_token) {
+    console.log(loginStatus)
+    if (!loginStatus) {
       setShowLogin(true);
       setShowTasks(false);
     } else {
       setShowLogin(false);
       setShowTasks(true);
     }
-  }, [cookie.user_token]);
+  }, [loginStatus]);
 
   const handleRegisterClick = () => {
     setShowLogin(false);
@@ -37,9 +39,11 @@ function Home() {
         <NavBar
           onClickRegister={handleRegisterClick}
           onClickLogin={handleLoginClick}
+          setLoginStatus={setLoginStatus}
+          loginStatus={loginStatus}
         />
-        {showRegister && <Register onClickLogin={handleLoginClick}/>}
-        {showLogin && <Login onClickRegister={handleRegisterClick}/>}
+        {showRegister && <Register onClickSignIn={handleLoginClick}/>}
+        {showLogin && <Login onClickSignUp={handleRegisterClick} setLoginStatus={setLoginStatus} />}
         
         {showTasks && <Tasks />}
       </div>
