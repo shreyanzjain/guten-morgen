@@ -6,6 +6,7 @@ function NavBar({
   onClickLogin,
   setLoginStatus,
   loginStatus,
+  loadingStatus,
 }) {
   const handleLogout = async () => {
     await axios
@@ -28,7 +29,7 @@ function NavBar({
         <div className="flex h-full items-center justify-between text-slate-50">
           <div className="ms-6 me-6 font-bold">Guten-Morgen</div>
           <div className="flex items-center justify-end me-6 font-bold">
-            {!loginStatus && (
+            {!loginStatus && !loadingStatus && (
               <a
                 className="ms-6 me-6"
                 href="#"
@@ -40,7 +41,7 @@ function NavBar({
                 Register
               </a>
             )}
-            {!loginStatus && (
+            {!loginStatus && !loadingStatus && (
               <a
                 href="#"
                 className="me-6"
@@ -52,7 +53,7 @@ function NavBar({
                 Login
               </a>
             )}
-            {loginStatus && (
+            {loginStatus && !loadingStatus && (
               <a href="#" onClick={handleLogout}>
                 Logout
               </a>
