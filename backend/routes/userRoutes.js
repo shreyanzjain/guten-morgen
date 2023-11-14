@@ -11,7 +11,7 @@ const {
   get_users,
   password_matches,
   get_userId,
-} = require("../methods/user_methods");
+} = require("../methods/userMethods");
 
 
 router.get("/users", authorization, async (req, res) => {

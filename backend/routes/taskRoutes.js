@@ -8,7 +8,7 @@ const {
   add_task,
   get_user_tasks,
   delete_task,
-} = require("../methods/task_methods");
+} = require("../methods/taskMethods");
 
 router.post("/add_task", authorization, jsonParser, (req, res) => {
   const { title, description } = req.body;
