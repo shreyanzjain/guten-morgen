@@ -21,7 +21,7 @@ function Tasks() {
   useEffect(() => {
     async function fetchData() {
       await axios
-        .get("http://127.0.0.1:3000/tasks/", {
+        .get("http://127.0.0.1:3000/tasks", {
           withCredentials: true,
         })
         .then((res) => {

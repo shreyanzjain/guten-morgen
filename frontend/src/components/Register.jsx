@@ -11,7 +11,7 @@ function Register({ onClickSignIn }) {
     event.preventDefault();
     await axios
       .post(
-        "http://127.0.0.1:3000/add/user",
+        "http://127.0.0.1:3000/add_user",
         {
           username: username,
           password: password,

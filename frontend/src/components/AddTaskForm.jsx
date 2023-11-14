@@ -9,7 +9,7 @@ function AddTaskForm({ onTaskAdded }) {
   const handleTaskSubmit = async () => {
     await axios
       .post(
-        "http://127.0.0.1:3000/add/tasks",
+        "http://127.0.0.1:3000/add_task",
         {
           title: title,
           description: description,

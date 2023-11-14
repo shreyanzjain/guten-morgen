@@ -17,7 +17,7 @@ function Home() {
   useEffect(() => {
     const checkLoginStatus = async () => {
       await axios
-        .get("http://127.0.0.1:3000/isLoggedIn/", {
+        .get("http://127.0.0.1:3000/is_logged_in/", {
           withCredentials: true,
         })
         .then((res) => {
